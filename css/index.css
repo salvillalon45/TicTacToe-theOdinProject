@@ -1,0 +1,155 @@
+/* Overall */
+/* --------------------------------------- */
+html, body, div {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto Slab', serif;
+  background-color: #f0f0f0;
+}
+
+button, i, .game-cell {
+  cursor: pointer;
+}
+
+.intro, .contact-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+h1 {
+  font-size: 45px;
+}
+
+.contact-container  {
+  margin-top: -40px;
+}
+
+/* Game Content */
+/* --------------------------------------- */
+.game-container {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  /* Made the width smaller and added margin. By changing the width it makes the columns try to fit into this space  */
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 10px;
+}
+
+.game-cell {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.library-button {
+  display: flex;
+  justify-content: center;
+}
+
+/* Form Page Content */
+/* --------------------------------------- */
+.form-page {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+form {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 250px;
+  padding: 25px;
+  background-color: #131a3d;
+  top: 50%;
+  left: 50%;
+  margin-top: -170px;
+  margin-left: -125px;
+  box-sizing: border-box;
+  color: white;
+  border-radius: 5px;
+  z-index: 2;
+}
+
+label {
+  padding: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+#form-btn {
+  width: 178px;
+  border-radius: 10px;
+  background-color: #99949c;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  font-family: 'Roboto Slab', serif;
+}
+
+#form-btn:hover {
+  background-color: #b5b0b8;
+}
+
+.cancel, .add {
+  border-radius: 10px;
+  background-color: #f8ecff;
+  border: none;
+  padding: 11px 13px;
+  text-align: center;
+  display: inline-block;
+  font-family: 'Roboto Slab', serif;
+}
+
+.cancel:hover, .add:hover {
+  background-color: #948b99;
+}
+
+/* GitHub Button */
+/* --------------------------------------- */
+#github-btn {
+  width: 140px;
+  background-color: #573fc4;
+  font-weight: bold;
+  color: white;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: 'Sen', sans-serif;
+}
+
+#github-btn:hover {
+  background-color: #2807b8;
+}
+
+#github-btn a {
+  text-decoration: none;
+  color: white;
+}
+
+/*@media only screen and (max-width: 1000px) {*/
+/*  .library-container {*/
+/*    margin-left: 0;*/
+/*    margin-right: 0;*/
+/*  }*/
+/*}*/
