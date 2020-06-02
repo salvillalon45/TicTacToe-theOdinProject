@@ -6,7 +6,7 @@ const PlayerFactor = function(name) {
 
 
 const GameBoardFactory = function() {
-    let gameBoard = ["x", "O", "0", "x", "x", "0", "x", "0", "x"];
+    let gameBoard = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
     // let currentMarker = "X";
     // let currentTurn = 1;
     //
@@ -62,41 +62,104 @@ const GameBoardFactory = function() {
 const GameFlowFactory = function(gameBoard) {
     let currentMarker = "X";
     let currentTurn = 1;
-    let gameCell = document.querySelector(".game-cell");
-    // console.log(gameCell.getAttribute('listener'));
+
+    function updateGameBoard(index) {
+        gameBoard[index] = currentMarker;
+        checkWin();
+    }
+
+    function createWinnerPopUp() {
+        console.log("Inside createWinnerPopup");
+
+        let winnerPopUp = document.querySelector(".winner-popup");
+        winnerPopUp.classList.remove("hidden");
+    }
+
+    function checkWin() {
+        console.log("Inside checkWin()");
+        console.log({currentMarker});
+        let winnerFlag = false;
+
+        // Rows
+        // ---------------------------------------------
+        if (gameBoard[0] === currentMarker && gameBoard[1] === currentMarker && gameBoard[2] === currentMarker) {
+            console.log("WON");
+            winnerFlag = true;
+        }
+        else if (gameBoard[3] === currentMarker && gameBoard[4] === currentMarker && gameBoard[5] === currentMarker) {
+            console.log("WON");
+            winnerFlag = true;
+        }
+        else if (gameBoard[6] === currentMarker && gameBoard[7] === currentMarker && gameBoard[8] === currentMarker) {
+            console.log("WON");
+            winnerFlag = true;
+        }
+        // Columns
+        // ---------------------------------------------
+        else if (gameBoard[0] === currentMarker && gameBoard[3] === currentMarker && gameBoard[6] === currentMarker) {
+            console.log("WON");
+            winnerFlag = true;
+        }
+        else if (gameBoard[1] === currentMarker && gameBoard[4] === currentMarker && gameBoard[7] === currentMarker) {
+            console.log("WON");
+            winnerFlag = true;
+        }
+        else if (gameBoard[2] === currentMarker && gameBoard[5] === currentMarker && gameBoard[8] === currentMarker) {
+            console.log("WON");
+            winnerFlag = true;
+        }
+        // Diagonals
+        // ---------------------------------------------
+        else if (gameBoard[0] === currentMarker && gameBoard[4] === currentMarker && gameBoard[8] === currentMarker) {
+            console.log("WON");
+            winnerFlag = true;
+        }
+        else if (gameBoard[2] === currentMarker && gameBoard[4] === currentMarker && gameBoard[6] === currentMarker) {
+            console.log("WON");
+            winnerFlag = true;
+        }
+
+        if (winnerFlag === false && gameBoard.indexOf(" ") < 0) {
+            console.log("TIE");
+        }
+        if (winnerFlag) {
+            createWinnerPopUp();
+        }
+    }
 
     function updateMarker(index) {
         console.log("Inside updateMarker()");
+        console.log("what is currentMarker:: " + currentMarker);
+
         if (currentMarker === "X") {
+            updateGameBoard(index);
             currentMarker = "O";
             currentTurn = 0;
-            gameBoard[index] = currentMarker;
         }
         else {
+            updateGameBoard(index);
             currentMarker = "X";
             currentTurn = 1;
-            gameBoard[index] = currentMarker;
+        }
+    }
+
+    function checkToAddMarker(that) {
+        let classArray = that.className.split(" ");
+
+        if (classArray.indexOf("taken") < 0) {
+            that.innerHTML = currentMarker;
+            that.classList.add("taken");
+            updateMarker(that.id);
+        }
+        else {
+            console.log("spot is taken");
         }
     }
 
     function addMarker() {
-
-        this.innerHTML = currentMarker;
-
-
-        let classArray = this.className.split(" ");
-
-        console.log(classArray);
-        if (classArray.length < 2) {
-            console.log("this.id" + this.id);
-            this.classList.add(currentTurn);
-            updateMarker(this.id);
-        }
-
-
-
-
-
+        console.log("Inside addMarker()");
+        let that = this;
+        checkToAddMarker(that);
     }
 
 

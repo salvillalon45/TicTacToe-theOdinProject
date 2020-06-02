@@ -64,7 +64,7 @@ h1 {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-form {
+#popup {
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -86,11 +86,7 @@ label {
   padding: 5px;
 }
 
-.hidden {
-  display: none;
-}
-
-#form-btn {
+.winner-popup {
   width: 178px;
   border-radius: 10px;
   background-color: #99949c;
@@ -101,6 +97,10 @@ label {
   font-size: 16px;
   margin: 4px 2px;
   font-family: 'Roboto Slab', serif;
+}
+
+.hidden {
+  display: none;
 }
 
 #form-btn:hover {
