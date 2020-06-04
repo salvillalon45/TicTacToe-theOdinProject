@@ -1,6 +1,9 @@
 console.log("Inside index.js");
 
 const PlayerFactor = function(name) {
+
+
+
     return { name };
 };
 
@@ -70,9 +73,22 @@ const GameFlowFactory = function(gameBoard) {
 
     function createWinnerPopUp() {
         console.log("Inside createWinnerPopup");
-
         let winnerPopUp = document.querySelector(".winner-popup");
-        winnerPopUp.classList.remove("hidden");
+
+        // Make the pop up appear
+        let popUp = document.querySelector(".popup");
+        popUp.classList.remove("hidden");
+
+        // Added who won to the pop up
+        let playerWon = document.createElement("p");
+        playerWon.innerHTML = "Player 1 Won";
+        winnerPopUp.append(playerWon);
+
+        // Button to play again
+        let playAgain = document.createElement("button");
+        playAgain.innerHTML = "play again";
+        playAgain.classList.add("play-again-btn");
+        winnerPopUp.append(playAgain);
     }
 
     function checkWin() {
@@ -162,10 +178,61 @@ const GameFlowFactory = function(gameBoard) {
         checkToAddMarker(that);
     }
 
+    function startScreen() {
+        console.log("Inside startScreen");
+        let winnerPopUp = document.querySelector(".start-screen");
+
+        // Make the start screen disappear after it is clicked
+        let startButton = document.querySelector(".start-btn");
+        startButton.addEventListener("click", startGame);
+    }
+
+    function startGame() {
+        console.log("Inside startGame()");
+
+        // Make the pop up appear
+        let startScreen = document.querySelector(".start-screen");
+        startScreen.classList.add("hidden");
+
+        let game = document.querySelector(".game-screen");
+        game.classList.remove("hidden");
+    }
+
+    function goBackToStartScreen() {
+
+    }
 
 
-    return { addMarker };
+
+    return { addMarker, startScreen };
 };
+
+
+// create a factor that is in charge of changing the screens.
+// this functiosn will go here:
+// function startScreen() {
+//     console.log("Inside startScreen");
+//     let winnerPopUp = document.querySelector(".start-screen");
+//
+//     // Make the start screen disappear after it is clicked
+//     let startButton = document.querySelector(".start-btn");
+//     startButton.addEventListener("click", startGame);
+// }
+//
+// function startGame() {
+//     console.log("Inside startGame()");
+//
+//     // Make the pop up appear
+//     let startScreen = document.querySelector(".start-screen");
+//     startScreen.classList.add("hidden");
+//
+//     let game = document.querySelector(".game-screen");
+//     game.classList.remove("hidden");
+// }
+//
+// function goBackToStartScreen() {
+//
+// }
 
 
 let GameBoardObj = GameBoardFactory();
@@ -175,3 +242,4 @@ let GameFlowObj = GameFlowFactory(gameBoardArray);
 
 
 GameBoardObj.render();
+GameFlowObj.startScreen();

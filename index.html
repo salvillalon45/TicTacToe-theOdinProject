@@ -14,21 +14,37 @@
 <body>
 
     <main>
-        <div class="intro">
+        <div class="start-screen">
+
             <h1>Tic Tac Toe</h1>
 
-            <div class="contact-container">
-                <h2>Made by <a href="https://salvillalon45.github.io/">Salvador Villalon</a></h2>
-                <button id="github-btn"><a href="https://github.com/salvillalon45/theOdinProject-TicTacToe">The Code</a></button>
+            <form>
+                <input type="text" placeholder="Player 1" id="player1">
+                <input type="text" placeholder="Player 2" id="player2">
+            </form>
+
+            <div class="button-box">
+                <button class="start-btn" id="start">start ></button>
             </div>
         </div>
 
-        <div class="game-container">
-        </div>
+        <div class="game-screen hidden">
+            <div class="intro">
+                <h1>Tic Tac Toe</h1>
 
-        <div class="popup">
-            <div class="winner-popup hidden">
-                <p>You have Won!</p>
+                <div class="contact-container">
+                    <h2>Made by <a href="https://salvillalon45.github.io/">Salvador Villalon</a></h2>
+                    <button id="github-btn"><a href="https://github.com/salvillalon45/theOdinProject-TicTacToe">The Code</a></button>
+                </div>
+            </div>
+
+            <div class="game-container">
+            </div>
+
+            <div class="popup hidden">
+                <div class="winner-popup">
+                    <p>You have Won!</p>
+                </div>
             </div>
         </div>
 
