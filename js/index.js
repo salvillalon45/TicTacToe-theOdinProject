@@ -17,16 +17,16 @@ const GameBoardFactory = function() {
     function render() {
 
         let gameContainer = document.querySelector(".game-container");
-        let gameBoardArray = gameBoard;
 
-        for (let i = 0; i < gameBoardArray.length; i++) {
+        for (let i = 0; i < gameBoard.length; i++) {
             let gameCell = document.createElement("div");
             gameCell.classList.add("game-cell");
             gameCell.id = String(i);
-            gameCell.innerHTML = gameBoardArray[i];
+            gameCell.innerHTML = gameBoard[i];
             gameContainer.append(gameCell);
         }
 
+        // Add an event listener to each cell
         addCellEvent();
     }
 
@@ -84,8 +84,16 @@ const GameFlowFactory = function(gameBoard) {
         let playerWon = "";
         let playerNext = "";
 
-        if (status === "tie") {
-            return "Draw!"
+        if (status === "tie" && currentTurn === 1) {
+            console.log("IT IS A TIE");
+            playerWon = "Draw!";
+            playerNext = player2Name.textContent + " turn is next";
+            return [playerWon, playerNext];
+        }
+        else if (status === "tie" && currentTurn === 0) {
+            playerWon = "Draw!";
+            playerNext = player1Name.textContent + " turn is next";
+            return [playerWon, playerNext];
         }
         if (currentTurn === 1) {
             playerWon = player1Name.textContent + " Won";
@@ -107,20 +115,15 @@ const GameFlowFactory = function(gameBoard) {
         let popUp = document.querySelector(".popup-container");
         popUp.classList.remove("hidden");
 
-        // Added who won to the pop up
+        // Add results of the game to the pop up
         let playerWon = document.createElement("p");
         let playerNext = document.createElement("p");
         let result = detectStatusOfGame(status);
 
-        if (result === "Draw") {
-            displayPopUp.append(result);
-        }
-        else {
-            playerWon.innerHTML = result[0];
-            playerNext.innerHTML = result[1];
-            displayPopUp.append(playerWon);
-            displayPopUp.append(playerNext);
-        }
+        playerWon.innerHTML = result[0];
+        playerNext.innerHTML = result[1];
+        displayPopUp.append(playerWon);
+        displayPopUp.append(playerNext);
 
         // Button to play again
         let playAgain = document.createElement("button");
@@ -282,6 +285,7 @@ const GameUtilityFactory = function() {
         let resetButton = document.querySelector(".reset-btn");
         resetButton.addEventListener("click", GameFlowObj.resetGame);
 
+        // Display the player names
         let player1Display = document.querySelector(".player1");
         player1Display.innerHTML = "<p>"+player1.name+"</p>";
 
