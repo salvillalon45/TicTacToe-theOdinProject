@@ -1,50 +1,21 @@
 console.log("Inside index.js");
 
-const PlayerFactor = function(name) {
-
-
-
-    return { name };
-};
-
-
 const GameBoardFactory = function() {
+
     let gameBoard = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
-    // let currentMarker = "X";
-    // let currentTurn = 1;
-    //
-    // function updateMarker(index) {
-    //
-    //     if (currentMarker === "X") {
-    //         currentMarker = "O";
-    //         currentTurn = 0;
-    //         gameBoard[index] = currentMarker;
-    //     }
-    //     else {
-    //         currentMarker = "X";
-    //         currentTurn = 1;
-    //         gameBoard[index] = currentMarker;
-    //     }
-    // }
-    //
-    // function addMarker() {
-    //     this.innerHTML = currentMarker;
-    //     this.classList.add(currentTurn);
-    //
-    //     updateMarker(this.id);
-    // }
 
     function addCellEvent() {
+
         let gameCellArray = Array.from(document.querySelectorAll(".game-cell"));
 
         for (let i = 0; i < gameCellArray.length; i++) {
             let cell = gameCellArray[i];
             cell.addEventListener("click", GameFlowObj.addMarker);
-            // cell.addEventListener("click", null);
         }
     }
 
     function render() {
+
         let gameContainer = document.querySelector(".game-container");
         let gameBoardArray = gameBoard;
 
@@ -66,96 +37,176 @@ const GameFlowFactory = function(gameBoard) {
     let currentMarker = "X";
     let currentTurn = 1;
 
-    function updateGameBoard(index) {
-        gameBoard[index] = currentMarker;
-        checkWin();
+    function resetGame() {
+
+        clearBoard();
+        GameBoardObj.render();
     }
 
-    function createWinnerPopUp() {
-        console.log("Inside createWinnerPopup");
-        let winnerPopUp = document.querySelector(".winner-popup");
+    function updateGameBoard(index) {
+
+        gameBoard[index] = currentMarker;
+        checkWin();
+        displayTurn();
+    }
+
+    function clearBoard() {
+
+        for (let i = 0; i < gameBoard.length; i++) {
+            gameBoard[i] = " ";
+        }
+
+        let gameContainer = document.querySelector(".game-container");
+        while (gameContainer.firstChild) {
+            gameContainer.removeChild(gameContainer.firstChild);
+        }
+    }
+
+    function displayTurn() {
+
+        let player1 = document.querySelector(".player1");
+        let player2 = document.querySelector(".player2");
+
+        if (currentTurn === 1) {
+            player1.style.backgroundColor = "#f22f46";
+            player2.style.backgroundColor = "#0D122B";
+        }
+        else {
+            player1.style.backgroundColor = "#0D122B";
+            player2.style.backgroundColor = "#f22f46";
+        }
+    }
+
+    function detectStatusOfGame(status) {
+
+        let player1Name = document.querySelector(".player1");
+        let player2Name = document.querySelector(".player2");
+        let playerWon = "";
+        let playerNext = "";
+
+        if (status === "tie") {
+            return "Draw!"
+        }
+        if (currentTurn === 1) {
+            playerWon = player1Name.textContent + " Won";
+            playerNext = player2Name.textContent + " turn is next";
+            return [playerWon, playerNext];
+        }
+        else {
+            playerWon = player2Name.textContent + " Won";
+            playerNext = player1Name.textContent + " turn is next";
+            return [playerWon, playerNext];
+        }
+    }
+
+    function createPopUp(status) {
+
+        let displayPopUp = document.querySelector(".popup");
 
         // Make the pop up appear
-        let popUp = document.querySelector(".popup");
+        let popUp = document.querySelector(".popup-container");
         popUp.classList.remove("hidden");
 
         // Added who won to the pop up
         let playerWon = document.createElement("p");
-        playerWon.innerHTML = "Player 1 Won";
-        winnerPopUp.append(playerWon);
+        let playerNext = document.createElement("p");
+        let result = detectStatusOfGame(status);
+
+        if (result === "Draw") {
+            displayPopUp.append(result);
+        }
+        else {
+            playerWon.innerHTML = result[0];
+            playerNext.innerHTML = result[1];
+            displayPopUp.append(playerWon);
+            displayPopUp.append(playerNext);
+        }
 
         // Button to play again
         let playAgain = document.createElement("button");
         playAgain.innerHTML = "play again";
         playAgain.classList.add("play-again-btn");
-        winnerPopUp.append(playAgain);
+
+        playAgain.addEventListener("click", function () {
+            clearBoard();
+            GameBoardObj.render();
+
+            // Reset the winner pop up by removing them
+            // This is okay since they will be created again
+            displayPopUp.removeChild(playerWon);
+            displayPopUp.removeChild(playerNext);
+            displayPopUp.removeChild(playAgain);
+
+            // Hide the pop up
+            popUp.classList.add("hidden");
+        });
+
+        displayPopUp.append(playAgain);
     }
 
     function checkWin() {
-        console.log("Inside checkWin()");
-        console.log({currentMarker});
+
         let winnerFlag = false;
 
         // Rows
         // ---------------------------------------------
         if (gameBoard[0] === currentMarker && gameBoard[1] === currentMarker && gameBoard[2] === currentMarker) {
-            console.log("WON");
             winnerFlag = true;
         }
         else if (gameBoard[3] === currentMarker && gameBoard[4] === currentMarker && gameBoard[5] === currentMarker) {
-            console.log("WON");
             winnerFlag = true;
         }
         else if (gameBoard[6] === currentMarker && gameBoard[7] === currentMarker && gameBoard[8] === currentMarker) {
-            console.log("WON");
             winnerFlag = true;
         }
         // Columns
         // ---------------------------------------------
         else if (gameBoard[0] === currentMarker && gameBoard[3] === currentMarker && gameBoard[6] === currentMarker) {
-            console.log("WON");
             winnerFlag = true;
         }
         else if (gameBoard[1] === currentMarker && gameBoard[4] === currentMarker && gameBoard[7] === currentMarker) {
-            console.log("WON");
             winnerFlag = true;
         }
         else if (gameBoard[2] === currentMarker && gameBoard[5] === currentMarker && gameBoard[8] === currentMarker) {
-            console.log("WON");
             winnerFlag = true;
         }
         // Diagonals
         // ---------------------------------------------
         else if (gameBoard[0] === currentMarker && gameBoard[4] === currentMarker && gameBoard[8] === currentMarker) {
-            console.log("WON");
             winnerFlag = true;
         }
         else if (gameBoard[2] === currentMarker && gameBoard[4] === currentMarker && gameBoard[6] === currentMarker) {
-            console.log("WON");
             winnerFlag = true;
         }
 
         if (winnerFlag === false && gameBoard.indexOf(" ") < 0) {
-            console.log("TIE");
+            createPopUp("tie");
         }
         if (winnerFlag) {
-            createWinnerPopUp();
+            createPopUp("won");
+        }
+    }
+
+    function updateTurn(marker) {
+        if (marker === "X") {
+            currentTurn = 0;
+        }
+        else {
+            currentTurn = 1;
         }
     }
 
     function updateMarker(index) {
-        console.log("Inside updateMarker()");
-        console.log("what is currentMarker:: " + currentMarker);
 
         if (currentMarker === "X") {
             updateGameBoard(index);
+            updateTurn("X");
             currentMarker = "O";
-            currentTurn = 0;
         }
         else {
             updateGameBoard(index);
+            updateTurn("O");
             currentMarker = "X";
-            currentTurn = 1;
         }
     }
 
@@ -173,73 +224,93 @@ const GameFlowFactory = function(gameBoard) {
     }
 
     function addMarker() {
-        console.log("Inside addMarker()");
+
         let that = this;
         checkToAddMarker(that);
     }
 
-    function startScreen() {
-        console.log("Inside startScreen");
-        let winnerPopUp = document.querySelector(".start-screen");
+    return { addMarker, resetGame };
+};
 
-        // Make the start screen disappear after it is clicked
+const PlayerFactory = function(name) {
+    return { name };
+};
+
+const GameUtilityFactory = function() {
+
+    let player1 = "";
+    let player2 = "";
+
+    function startScreen() {
+
+        // Add event listener to start button and gather the names of the players
         let startButton = document.querySelector(".start-btn");
-        startButton.addEventListener("click", startGame);
+        startButton.addEventListener("click", () => {
+
+            let player1Form = document.forms["PlayersForm"]["player1"];
+            let player2Form = document.forms["PlayersForm"]["player2"];
+
+            // If they do not enter a name for either player then default will Player 1 or Player 2
+            if (player1Form.value.length === 0 || player2Form.value.length === 0) {
+                player1 = PlayerFactory("Player 1");
+                player2 = PlayerFactory("Player 2");
+            }
+            else {
+                player1 = PlayerFactory(player1Form.value);
+                player2 = PlayerFactory(player2Form.value);
+            }
+
+            startGame();
+        });
     }
 
     function startGame() {
-        console.log("Inside startGame()");
 
-        // Make the pop up appear
-        let startScreen = document.querySelector(".start-screen");
+        // Make the start screen disappear
+        let startScreen = document.querySelector(".start-screen-container");
         startScreen.classList.add("hidden");
 
-        let game = document.querySelector(".game-screen");
+        // Make the game appear
+        let game = document.querySelector(".game-screen-container");
         game.classList.remove("hidden");
+
+        // Add event listener to back button
+        let backButton = document.querySelector(".back-btn");
+        backButton.addEventListener("click", goBackToStartScreen);
+
+        // Add event listener to reset button
+        let resetButton = document.querySelector(".reset-btn");
+        resetButton.addEventListener("click", GameFlowObj.resetGame);
+
+        let player1Display = document.querySelector(".player1");
+        player1Display.innerHTML = "<p>"+player1.name+"</p>";
+
+        let player2Display = document.querySelector(".player2");
+        player2Display.innerHTML = "<p>"+player2.name+"</p>";
     }
 
     function goBackToStartScreen() {
 
+        // Make the game disappear
+        let game = document.querySelector(".game-screen-container");
+        game.classList.add("hidden");
+
+        // Make the start screen appear
+        let startScreen = document.querySelector(".start-screen-container");
+        startScreen.classList.remove("hidden");
     }
 
+    return {
+        startScreen, player1, player2
+    }
+}
 
-
-    return { addMarker, startScreen };
-};
-
-
-// create a factor that is in charge of changing the screens.
-// this functiosn will go here:
-// function startScreen() {
-//     console.log("Inside startScreen");
-//     let winnerPopUp = document.querySelector(".start-screen");
-//
-//     // Make the start screen disappear after it is clicked
-//     let startButton = document.querySelector(".start-btn");
-//     startButton.addEventListener("click", startGame);
-// }
-//
-// function startGame() {
-//     console.log("Inside startGame()");
-//
-//     // Make the pop up appear
-//     let startScreen = document.querySelector(".start-screen");
-//     startScreen.classList.add("hidden");
-//
-//     let game = document.querySelector(".game-screen");
-//     game.classList.remove("hidden");
-// }
-//
-// function goBackToStartScreen() {
-//
-// }
-
-
+// Create the factories
+// Here are creating closure. Only allowing access to certain functions and making everything that is not return private
+let GameUtilityObj = GameUtilityFactory();
 let GameBoardObj = GameBoardFactory();
-let gameBoardArray = GameBoardObj.gameBoard;
-let GameFlowObj = GameFlowFactory(gameBoardArray);
+let GameFlowObj = GameFlowFactory(GameBoardObj.gameBoard);
 
-
-
+// Start the application
+GameUtilityObj.startScreen();
 GameBoardObj.render();
-GameFlowObj.startScreen();

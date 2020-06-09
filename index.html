@@ -14,37 +14,52 @@
 <body>
 
     <main>
-        <div class="start-screen">
-
+        <div class="start-screen-container">
             <h1>Tic Tac Toe</h1>
 
-            <form>
-                <input type="text" placeholder="Player 1" id="player1">
-                <input type="text" placeholder="Player 2" id="player2">
+            <div class="contact-container">
+                <h2>Made by <a href="https://salvillalon45.github.io/">Salvador Villalon</a></h2>
+                <button id="github-btn"><a href="https://github.com/salvillalon45/theOdinProject-TicTacToe">The Code</a></button>
+            </div>
+
+            <h2>Enter names for your players</h2>
+            <h3>Player 1 starts the game</h3>
+
+            <form class="players-form" name="PlayersForm">
+                <label for="player1"></label>
+                <input type="text" placeholder="Player 1 - X" id="player1" name="player1">
+
+                <label for="player2"></label>
+                <input type="text" placeholder="Player 2 - O" id="player2" name="player2">
             </form>
 
-            <div class="button-box">
-                <button class="start-btn" id="start">start ></button>
+            <div class="button-container">
+                <button class="start-btn" id="start">start</button>
             </div>
         </div>
 
-        <div class="game-screen hidden">
+        <div class="game-screen-container hidden">
             <div class="intro">
                 <h1>Tic Tac Toe</h1>
-
-                <div class="contact-container">
-                    <h2>Made by <a href="https://salvillalon45.github.io/">Salvador Villalon</a></h2>
-                    <button id="github-btn"><a href="https://github.com/salvillalon45/theOdinProject-TicTacToe">The Code</a></button>
+                <div class="player-info">
+                    <div class="player1">
+                    </div>
+                    <div class="player2">
+                    </div>
                 </div>
             </div>
 
             <div class="game-container">
             </div>
 
-            <div class="popup hidden">
-                <div class="winner-popup">
-                    <p>You have Won!</p>
+            <div class="popup-container hidden">
+                <div class="popup">
                 </div>
+            </div>
+
+            <div class="util-container">
+                <button class="back-btn">back</button>
+                <button class="reset-btn">reset</button>
             </div>
         </div>
 

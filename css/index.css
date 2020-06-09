@@ -15,7 +15,7 @@ button, i, .game-cell {
   cursor: pointer;
 }
 
-.intro, .contact-container, .start-screen {
+.intro, .contact-container, .start-screen-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,15 +26,24 @@ h1 {
   font-size: 45px;
 }
 
+.start-screen-container h3 {
+  margin-top: -10px;
+}
+
 .contact-container  {
   margin-top: -40px;
+  margin-bottom: 35px;
+}
+
+.hidden {
+  display: none;
 }
 
 /* Game Content */
 /* --------------------------------------- */
 .game-container {
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(3, 200px);
   /* Made the width smaller and added margin. By changing the width it makes the columns try to fit into this space  */
   margin: 0 auto;
   max-width: 600px;
@@ -44,19 +53,15 @@ h1 {
 .game-cell {
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
+  padding: 30px;
   font-size: 30px;
   text-align: center;
+  height: 100px;
 }
 
-.library-button {
-  display: flex;
-  justify-content: center;
-}
-
-/* Form Page Content */
+/* Popup */
 /* --------------------------------------- */
-.popup {
+.popup-container {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -64,19 +69,20 @@ h1 {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-.winner-popup {
+.popup {
   position: fixed;
   padding: 15px 32px;
   background-color: #131a3d;
   top: 50%;
   left: 50%;
   margin-top: -80px;
-  margin-left: -85px;
+  /*margin-left: -85px;*/
+  margin-left: -90px;
   box-sizing: border-box;
   color: white;
   border-radius: 5px;
   z-index: 2;
-  width: 178px;
+  width: 220px;
   border: none;
   text-align: center;
   display: inline-block;
@@ -84,6 +90,8 @@ h1 {
   font-family: 'Roboto Slab', serif;
 }
 
+/* Buttons: Start Button, Reset Button, Play Again Button, Back Button */
+/* --------------------------------------- */
 .play-again-btn {
   font-weight: bold;
   border: none;
@@ -100,12 +108,79 @@ h1 {
   background-color: #948b99;
 }
 
+.button-container {
+  margin-left: 7px;
+  margin-top: 20px;
+}
+
+.button-container .start-btn, .back-btn, .reset-btn {
+  width: 140px;
+  background-color: #F22F46;
+  color: white;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  font-family: 'Roboto Slab', serif;
+  border-radius: 5px;
+}
+
+.reset-btn {
+  margin-left: 10px;
+}
+
+.start-btn:hover, .back-btn:hover, .reset-btn:hover {
+  background-color: #b11f31;
+}
+
+.button-container .start-btn:focus {
+  outline: none;
+}
+
+.util-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Insert Player Name */
+/* --------------------------------------- */
 label {
   padding: 5px;
 }
 
-.hidden {
-  display: none;
+.player-info {
+  display: flex;
+  width: 575px;
+  justify-content: space-between;
+}
+
+.players-form input {
+  background: #0D122B;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  padding: 10px;
+  font-family: 'Roboto Slab', serif;
+  font-size: 19px;
+}
+
+.players-form input, button:focus {
+  outline: none;
+}
+
+::placeholder {
+  color: white;
+  font-family: 'Roboto Slab', serif;
+}
+
+.player1, .player2 {
+  background-color: #0D122B;
+  color: white;
+  border-radius: 5px;
+  width: 140px;
+  text-align: center;
 }
 
 /* GitHub Button */
@@ -123,20 +198,14 @@ label {
   margin: 4px 2px;
   cursor: pointer;
   font-family: 'Sen', sans-serif;
+  border-radius: 5px;
 }
 
 #github-btn:hover {
-  background-color: #2807b8;
+  background-color: #5238c5;
 }
 
 #github-btn a {
   text-decoration: none;
   color: white;
 }
-
-/*@media only screen and (max-width: 1000px) {*/
-/*  .library-container {*/
-/*    margin-left: 0;*/
-/*    margin-right: 0;*/
-/*  }*/
-/*}*/
