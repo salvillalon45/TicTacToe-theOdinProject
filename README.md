@@ -6,6 +6,19 @@ Making a Tic Tac Toe game you can play in your browser!
  
 You can find more on the project here: [The Odin Project - Tic Tac Toe](https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe)
 
+
+### Implementation 
+- Used HTML, CSS, and JavaScript to complete application
+- Implemented JavaScript factory functions to organize 
+
+### Demo
+<img alt="Tic Tac Toe Demo" src="./tic_tac_toe.gif" width="600" />
+
+### 📗 Fonts used
+
+-   [Roboto Slab](https://fonts.google.com/specimen/Roboto+Slab?query=Roboto+Slab)
+-   [Sen](https://fonts.google.com/specimen/Sen)
+
 # Technologies:
   - HTML
   - CSS
