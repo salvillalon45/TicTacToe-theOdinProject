@@ -3,9 +3,8 @@
 
 # Summary
 Making a Tic Tac Toe game you can play in your browser!
- 
-You can find more on the project here: [The Odin Project - Tic Tac Toe](https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe)
-
+- Project Task: [The Odin Project - Tic Tac Toe](https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe)
+- View Project: https://salvillalon45.github.io/theOdinProject-TicTacToe/
 
 ### Implementation 
 - Used HTML, CSS, and JavaScript to complete application
