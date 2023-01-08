@@ -1,5 +1,5 @@
-# theOdinProject-TicTacToe
-[TheOdinProject: Javascript] - Project: Tic Tac Toe
+# Tic Tac Toe
+[The Odin Project: Javascript] - Project: Tic Tac Toe
 
 # Summary
 Making a Tic Tac Toe game you can play in your browser!
